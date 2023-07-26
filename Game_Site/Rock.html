@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>랜덤 가위바위보 게임</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #result {
+            font-size: 20px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>랜덤 가위바위보 게임</h1>
+    <p>가위, 바위, 보 중 하나를 선택하세요.</p>
+    <button onclick="play('가위')">가위</button>
+    <button onclick="play('바위')">바위</button>
+    <button onclick="play('보')">보</button>
+    <p id="result"></p>
+
+    <script>
+        // 컴퓨터가 랜덤으로 가위, 바위, 보를 선택하는 함수
+        function computerPlay() {
+            const choices = ['가위', '바위', '보'];
+            const randomIndex = Math.floor(Math.random() * 3);
+            return choices[randomIndex];
+        }
+
+        // 사용자가 선택한 것과 컴퓨터가 선택한 것을 비교하여 결과를 반환하는 함수
+        function play(userChoice) {
+            const computerChoice = computerPlay();
+            let resultMessage = '';
+
+            if (userChoice === computerChoice) {
+                resultMessage = '비겼습니다!';
+            } else if (
+                (userChoice === '가위' && computerChoice === '보') ||
+                (userChoice === '바위' && computerChoice === '가위') ||
+                (userChoice === '보' && computerChoice === '바위')
+            ) {
+                resultMessage = '사용자가 이겼습니다!';
+            } else {
+                resultMessage = '컴퓨터가 이겼습니다!';
+            }
+
+            // 결과를 화면에 출력
+            document.getElementById('result').textContent = resultMessage;
+        }
+    </script>
+</body>
+</html>
