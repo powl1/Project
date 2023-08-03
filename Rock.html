@@ -26,7 +26,7 @@
     <div id="headers"></div>
     <!-- 헤더 끝 시작 -->
 
-    <main>
+    <!-- <main>
         <h1>가위바위보 게임</h1>
         <div class="wrap content w-75">
             <div class="d-flex text-center justify-content-center w-100">
@@ -61,6 +61,41 @@
                 </div>
             </div>
         </div>
+    </main> -->
+
+    <main>
+    <h1>가위바위보 게임</h1>
+
+    <div class="d-flex text-center justify-content-center w-100">
+        <div class="card" style="width: 18rem;margin: 0 10px;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">YOU</h5>
+              <p class="card-text">하나를 선택하세요</p>
+              <div class="choose">
+                  <button onclick="play('가위')">가위</button>
+                  <button onclick="play('바위')">바위</button>
+                  <button onclick="play('보')">보</button>
+              </div>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem; margin: 0 10px;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">결과</h5>
+                <p id="result" class="card-text">결과</p>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem; margin: 0 10px;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">COM</h5>
+              <p class="card-text" id="computerChoice"><div ></div></p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
     </main>
 
     <!-- 푸터 시작 -->
@@ -98,21 +133,43 @@
     </script>
 </body>
 <script>
-    window.addEventListener('load', function() {
-        var allElements = document.getElementsByTagName('*');
-        Array.prototype.forEach.call(allElements, function(el) {
-            var includePath = el.dataset.includePath;
-            if (includePath) {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        el.outerHTML = this.responseText;
-                    }
-                };
-                xhttp.open('GET', includePath, true);
-                xhttp.send();
-            }
-        });
+    $(document).ready(function() {
+    var choices = ["가위", "바위", "보"];
+    
+    $("#rock").click(function() {
+        playGame(0);
     });
-  </script>
+    
+    $("#paper").click(function() {
+        playGame(1);
+    });
+    
+    $("#scissors").click(function() {
+        playGame(2);
+    });
+    
+    function playGame(playerChoice) {
+        var computerChoice = Math.floor(Math.random() * 3);
+        var resultText;
+        
+        if (playerChoice === computerChoice) {
+            resultText = "비겼습니다!";
+        } else if ((playerChoice === 0 && computerChoice === 2) ||
+                   (playerChoice === 1 && computerChoice === 0) ||
+                   (playerChoice === 2 && computerChoice === 1)) {
+            resultText = "이겼습니다!";
+        } else {
+            resultText = "졌습니다!";
+        }
+        
+        var resultMessage = "결과: " + resultText;
+        var computerChoiceMessage = choices[computerChoice];
+        
+        $("#result").html(resultMessage);
+        $("#computerChoice").html(computerChoiceMessage);
+    }
+    });
+
+</script>
+
 </html>
