@@ -19,7 +19,10 @@
         $("#headers").load("/header.html");
         $("#footers").load("/footer.html");
       });
-      </script>
+    </script>
+    <style>
+      main { background: url(/img/main-bg.png) no-repeat; background-position: center; background-size: 100vh; opacity: .5; width: 100vw; height: 100vh; }
+    </style>
 </head>
 <body class= "d-flex vw-100 vh-100 text-center flex-column justify-content-between">
   <!-- 헤더 시작 -->
@@ -28,7 +31,9 @@
 
   <!-- 메인 시작 -->
   <main>
-    <p class="bg-warning">로또와 가위바위보 들어 가는 자리</p>
+    <div class="img-fluid">
+      <p>로또와 가위바위보 들어 가는 자리</p>
+    </div>
   </main>
   <!-- 메인 끝 -->
 
